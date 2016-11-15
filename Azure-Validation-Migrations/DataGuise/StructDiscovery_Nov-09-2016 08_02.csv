@@ -1,0 +1,4 @@
+Task Instance ID,Task Name,Sensitive Type,File Path,File Type,Discovery Type,Content Read,Sensitive Items Count,Masked,Encrypted,Incremental Scan
+2,"StructDiscovery","Full Names","//cltxz3l@st1cltrtxz3l.blob.core.windows.net/Marketing/payroll.csv","","","",80,false,false,false
+2,"StructDiscovery","Telephone (Digits Only)","//cltxz3l@st1cltrtxz3l.blob.core.windows.net/Marketing/payroll.csv","","","",40,false,false,false
+2,"StructDiscovery","Social Security # (Digits Only)","//cltxz3l@st1cltrtxz3l.blob.core.windows.net/Marketing/payroll.csv","","","",100,false,false,false

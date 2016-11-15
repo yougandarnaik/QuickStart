@@ -1,0 +1,11 @@
+Task Instance ID,Task Name,Sensitive Type,File Path,File Type,Discovery Type,Content Read,Sensitive Items Count,Masked,Encrypted,Incremental Scan
+1,UnstructDiscovery,Email Address,//cltxz3l@st1cltrtxz3l.blob.core.windows.net/HR/charter_one.txt,,,,6,FALSE,FALSE,FALSE
+1,UnstructDiscovery,Social Security # (Dash Separation),//cltxz3l@st1cltrtxz3l.blob.core.windows.net/HR/charter_one.txt,,,,1,FALSE,FALSE,FALSE
+1,UnstructDiscovery,Telephone (Standard without spaces),//cltxz3l@st1cltrtxz3l.blob.core.windows.net/HR/charter_one.txt,,,,3,FALSE,FALSE,FALSE
+1,UnstructDiscovery,Social Security # (Space Separation),//cltxz3l@st1cltrtxz3l.blob.core.windows.net/HR/charter_one.txt,,,,1,FALSE,FALSE,FALSE
+1,UnstructDiscovery,Telephone (Dash Separation),//cltxz3l@st1cltrtxz3l.blob.core.windows.net/HR/charter_one.txt,,,,3,FALSE,FALSE,FALSE
+1,UnstructDiscovery,Telephone (Digits Only),//cltxz3l@st1cltrtxz3l.blob.core.windows.net/HR/charter_one.txt,,,,3,FALSE,FALSE,FALSE
+1,UnstructDiscovery,Full Names,//cltxz3l@st1cltrtxz3l.blob.core.windows.net/HR/charter_one.txt,,,,1,FALSE,FALSE,FALSE
+1,UnstructDiscovery,Social Security # (Digits Only),//cltxz3l@st1cltrtxz3l.blob.core.windows.net/HR/charter_one.txt,,,,1,FALSE,FALSE,FALSE
+1,UnstructDiscovery,Telephone (Standard),//cltxz3l@st1cltrtxz3l.blob.core.windows.net/HR/charter_one.txt,,,,3,FALSE,FALSE,FALSE
+1,UnstructDiscovery,Telephone (Space Separation),//cltxz3l@st1cltrtxz3l.blob.core.windows.net/HR/charter_one.txt,,,,3,FALSE,FALSE,FALSE
