@@ -1,0 +1,37 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+      "location":{
+          "type": "string",
+         "defaultValue":"",
+         "metadata": {
+             "description":"location"
+         }
+      },
+"availabilitySetName": {
+       "type": "string",
+         "defaultValue":"",
+            "metadata": {
+                "description": "Availabilityset Name"
+            }
+  },
+  "apiVersion":{
+      "type": "string",
+         "defaultValue":"",
+            "metadata": {
+                "description": "API Version gor the Compute Resources"
+            }
+  }
+  },
+  "variables":{
+  },
+   "resources": [
+        {
+            "type": "Microsoft.Compute/availabilitySets",
+            "name": "[parameters('availabilitySetName')]",
+            "apiVersion": "[parameters('apiVersion')]",
+            "location": "[parameters('location')]"
+        }
+   ]
+}
