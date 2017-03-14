@@ -4,7 +4,7 @@
     "parameters": {
         "vnetname" : {
             "type": "string",
-            "defaultValue": "",
+            "defaultValue": "webgoat-vnet",
             "metadata": {
                 "description":"Virtual Network Name"
             }
