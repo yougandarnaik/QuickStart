@@ -1,0 +1,61 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "type": "string",
+            "defaultValue": "",
+            "metadata": {
+                "description": "Deployment Location Hint: Use lowercase for creating ipaddress"
+            }
+        },
+        "networkApiVersion": {
+            "type": "string",
+            "defaultValue": "",
+            "metadata": {
+                "description": "API Version for the Network Resources"
+            }
+        },
+        "networkInterfaceName": {
+            "type": "string",
+            "defaultValue": "",
+            "metadata": {
+                "description": "Network Interface Name"
+            }
+        },
+        "FGProtectedAddress": {
+            "type": "string",
+            "defaultValue": "",
+            "metadata": {
+                "description": "Network Interface Name"
+            }
+        }
+    },
+    "variables": {},
+    "resources": [
+    {
+            "apiVersion": "[parameters('networkApiVersion')]",
+            "type": "Microsoft.Network/networkInterfaces",
+            "name": "[parameters('networkInterfaceName')]",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+                "[concat('Microsoft.Resources/deployments/', 'SettingUpVirtualNetwork')]"
+            ],
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig1",
+                        "properties": {
+                            "privateIPAllocationMethod": "Static",
+                            "privateIPAddress": "[parameters('FGProtectedAddress')]",
+                            "subnet": {
+                                "id": "[reference('Microsoft.Resources/deployments/SettingUpVirtualNetwork', '2015-01-01').outputs.subnet2ID.value]"
+                            }
+                        }
+                    }
+                ],
+                "enableIPForwarding": true
+            }
+        }
+    ]
+}
