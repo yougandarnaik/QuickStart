@@ -4,6 +4,7 @@
     "parameters": {
         "nsgname": {
             "type": "string",
+            "defaultValue": "webgoat-nsg",
             "metadata": {
                 "description": "networkSecurityGroups Name"
             }
