@@ -80,13 +80,6 @@
                 "description":"Admin Username of Virtual Machine to SSH or RDP"
             }
         },
-        "vmStorageAccountContainerName": { 
-           "type": "string", 
-           "defaultValue": "vhds", 
-            "metadata": { 
-                "description": "Caintainer name in the storage account" 
-            } 
-       },
        "computeApiVersion": {
            "type": "string",
            "defaultValue": "2015-06-15",
@@ -116,10 +109,10 @@
                         "version": "[parameters('imageVersion')]"
                     },
                     "osDisk": {
-                        "name": "[concat(parameters('vmname'),'osDisk')]",
+                        "name": "[parameters('vmname')]",
                         "createOption": "FromImage",
                         "vhd": {
-                            "uri": "[concat('https', '://', parameters('saname'), '.blob.core.windows.net/', parameters('vmStorageAccountContainerName'),'/', parameters('vmname'),'-osdisk.vhd')]"
+                            "uri": "[concat('https', '://', parameters('saname'), '.blob.core.windows.net/vhds/', parameters('vmname'),'-osdisk.vhd')]"
                         },
                         "caching": "ReadWrite"
                     },
