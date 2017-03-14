@@ -4,6 +4,7 @@
     "parameters": {
         "pipname": {
             "type": "string",
+            "defaultValue": "webgoat-ip",
             "metadata": {
                 "description": "Public IP Name "
             }
