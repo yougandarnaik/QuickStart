@@ -4,6 +4,7 @@
     "parameters": {
         "saname": {
             "type": "string",
+            "defaultValue": "webgoatsa",
             "metadata": {
                 "description":"storage account name"
             }
