@@ -4,24 +4,28 @@
     "parameters": {
        "nicname": {
            "type": "string",
+           "defaultValue": "webgoat-nic",
            "metadata": {
                "description": "networkInterface Name"
            }
        },
        "pipname": {
            "type": "string",
+           "defaultValue": "webgoat-ip",
            "metadata": {
                "description": "publicIPAddress Name"
            }
        },
        "vnetname" :{
         "type": "string",
+           "defaultValue": "webgoat-vnet",
            "metadata": {
                "description": "virtualNetwork Name"
            }
        },
        "nsgname" :{
         "type": "string",
+           "defaultValue": "webgoat-nsg",
            "metadata": {
                "description": "networkSecurityGroup Name"
            }
