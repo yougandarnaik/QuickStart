@@ -1,0 +1,41 @@
+
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "storageAccountName": {
+            "type": "string",
+            "defaultValue": "testhdisks",
+            "metadata": {
+                "description":"storage account of the vm"
+            }
+        },
+        "location": {
+            "type": "string",
+            "defaultValue": "centralus",
+            "metadata": {
+                "description":"storage account location"
+            }
+        },
+        "storageAccountType": {
+            "type": "string",
+            "defaultValue": "Premium_LRS",
+            "metadata": {
+                "description":"storage account type the vm"
+            }
+        }
+    },
+     "variables": {
+    },
+    "resources": [
+        {
+            "name": "[parameters('storageAccountName')]",
+            "type": "Microsoft.Storage/storageAccounts",
+            "apiVersion": "2015-06-15",
+            "location": "[parameters('location')]",
+            "properties": {
+                "accountType": "[parameters('storageAccountType')]"
+            }
+        }
+    ]
+}
