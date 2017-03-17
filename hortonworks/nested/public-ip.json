@@ -59,7 +59,7 @@
             }
         },
         "tag": {
-            "type": "string",
+            "type": "object",
             "defaultValue": {
                 "key1":"key",
                 "value1":"value"
