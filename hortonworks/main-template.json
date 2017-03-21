@@ -1,0 +1,331 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": { 
+             "type": "string",              
+                "defaultValue": "centralus", 
+                "allowedValues": [ 
+                 "Brazil South", 
+                 "brazilsouth", 
+                 "East Asia", 
+                 "eastasia", 
+                 "East US", 
+                 "eastus", 
+                 "Japan East", 
+                 "japaneast", 
+                 "Japan West", 
+                 "japanwest", 
+                 "North Central US", 
+                 "northcentralus", 
+                 "North Europe", 
+                 "northeurope", 
+                 "South Central US", 
+                 "southcentralus", 
+                 "West Europe", 
+                 "westeurope", 
+                 "West US", 
+                 "westus", 
+                 "Southeast Asia", 
+                 "southeastasia", 
+                 "Central US", 
+                 "centralus", 
+                 "East US 2", 
+                 "eastus2" 
+             ], 
+             "metadata": { 
+                 "description": "Deployment Location" 
+             } 
+         },
+         "publicIpAddressName":{
+             "type": "string",
+             "defaultValue": "hortonworks-ip",
+             "metadata": {
+                 "description":"public ip address name"
+             }
+         },
+         "tag": {
+            "type": "object",
+            "defaultValue": {
+                "key1": "deploymentfile",
+                "value1": "hortonworks"
+            },
+            "metadata": {
+                "description": "Custom Tag Values"
+            }
+        },
+        "virtualMachineName":{
+             "type": "string",
+             "defaultValue": "hortonworks",
+             "metadata": {
+                 "description":"virtualMachineName"
+             }
+         },
+         "adminUsername":{
+             "type": "string",
+             "defaultValue": "hortonworks",
+             "metadata": {
+                 "description":"adminUsername"
+             }
+         },
+         "adminPassword":{
+             "type": "securestring",
+             "defaultValue": "Hortonworks@123",
+             "metadata": {
+                 "description":"adminPassword"
+             }
+         }
+    },
+     "variables": {
+         "prefix": "[uniqueString(resourceGroup().id)]", 
+         "uid": "[substring(variables('prefix') ,0 ,5)]", 
+         "storageAccType":"Standard_LRS",
+         "storageApiVersion":"2015-06-15",
+         "deploymentApiVersion":"2016-03-30",
+         "virtualNetworkName":"test-h-vnet",
+         "networkApiVersion":"2016-09-01",
+         "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',variables('virtualNetworkName'))]",
+         "networkInterfaceName":"[concat('hortnic',variables('uid'))]",
+         "networkSecurityGroupName":"[concat(variables('virtualNetworkName'),'-nsg')]",
+         "storageAccountName":"[concat('hortstrg',variables('uid'))]",
+         "publicIPdnsPrefix":"[concat('hortdns',variables('uid'))]",
+         "subnetName":"test-h-subnet",
+         "subnetRef":"[concat(variables('vnetID'),'/subnets/',variables('subnetName'))]",
+         "addressPrefix":"172.16.2.0/24",
+         "subnetPrefix":"172.16.2.0/24",
+         "virtualMachineSize":"Standard_DS1_v2",
+         "imagePublisher":"hortonworks",
+         "imageOffer":"hortonworks-sandbox",
+         "imageSKU":"sandbox25",
+         "imageVersion":"latest",
+         "baseUrl": "https://raw.githubusercontent.com/yougandarnaik/QuickStart/hortonworks/hortonworks",
+         "virtualNetworkSetupURL":"[concat(variables('baseUrl'),'/nested/vnet.json')]",
+         "publicIPAddressSetupURL":"[concat(variables('baseUrl'),'/nested/public-ip.json')]",   
+         "storageAccountSetupURL":"[concat(variables('baseUrl'),'/nested/storage.json')]",
+         "virtualMachineSetupURL":"[concat(variables('baseUrl'),'/nested/vm.json')]",
+         "networkSecurityGroupSetupURL":"[concat(variables('baseUrl'),'/nested/nsg.json')]",        
+         "networkInterfaceSetupURL":"[concat(variables('baseUrl'),'/nested/nic.json')]"     
+    },
+    "resources": [
+        { 
+             "name": "storageAccountSetup", 
+             "apiVersion": "[variables('deploymentApiVersion')]", 
+             "type": "Microsoft.Resources/deployments", 
+             "properties": { 
+                 "mode": "Incremental", 
+                 "templateLink": { 
+                     "uri": "[variables('storageAccountSetupURL')]", 
+                     "contentVersion": "1.0.0.0" 
+                 }, 
+                 "parameters": { 
+                     "location": { 
+                         "value": "[parameters('location')]" 
+                     }, 
+                     "storageAccountName": { 
+                        "value": "[variables('storageAccountName')]" 
+                     }, 
+                     "storageAccountType": { 
+                         "value": "[variables('storageAccType')]" 
+                     }, 
+                     "storageApiVersion": { 
+                         "value": "[variables('storageApiVersion')]" 
+                     } 
+                 } 
+             } 
+         },
+         { 
+             "name": "publicIPAddressSetup", 
+             "apiVersion": "[variables('deploymentApiVersion')]", 
+             "type": "Microsoft.Resources/deployments", 
+              "dependsOn": [
+                "virtualNetworkSetup"
+            ],
+             "properties": { 
+                 "mode": "Incremental", 
+                 "templateLink": { 
+                     "uri": "[variables('publicIPAddressSetupURL')]", 
+                     "contentVersion": "1.0.0.0" 
+                 }, 
+                 "parameters": { 
+                     "location": { 
+                         "value": "[parameters('location')]" 
+                     }, 
+                     "publicIpAddressName": { 
+                        "value": "[parameters('publicIpAddressName')]" 
+                     }, 
+                     "networkApiVersion": { 
+                         "value": "[variables('networkApiVersion')]" 
+                     }, 
+                     "publicIPdnsPrefix": { 
+                         "value": "[variables('publicIPdnsPrefix')]" 
+                     } 
+                 } 
+             } 
+         },
+         { 
+             "name": "virtualNetworkSetup", 
+             "apiVersion": "[variables('deploymentApiVersion')]", 
+             "type": "Microsoft.Resources/deployments", 
+             "properties": { 
+                 "mode": "Incremental", 
+                 "templateLink": { 
+                     "uri": "[variables('virtualNetworkSetupURL')]", 
+                     "contentVersion": "1.0.0.0" 
+                 }, 
+                 "parameters": { 
+                     "location": { 
+                         "value": "[parameters('location')]" 
+                     }, 
+                     "virtualNetworkName": { 
+                        "value": "[variables('virtualNetworkName')]" 
+                     }, 
+                     "subnetName": { 
+                         "value": "[variables('subnetName')]" 
+                     },
+                     "addressPrefix" :{
+                         "value":"[variables('addressPrefix')]"
+                     },
+                     "subnetPrefix" :{
+                         "value":"[variables('subnetPrefix')]"
+                     },
+                      "networkApiVersion": { 
+                         "value": "[variables('networkApiVersion')]" 
+                     }
+                 } 
+             } 
+         },
+         { 
+             "name": "networkSecurityGroupsSetup", 
+             "apiVersion": "[variables('deploymentApiVersion')]", 
+             "type": "Microsoft.Resources/deployments", 
+             "dependsOn": [
+                "virtualNetworkSetup"
+            ],
+             "properties": { 
+                 "mode": "Incremental", 
+                 "templateLink": { 
+                     "uri": "[variables('networkSecurityGroupSetupURL')]", 
+                     "contentVersion": "1.0.0.0" 
+                 }, 
+                 "parameters": { 
+                     "location": { 
+                         "value": "[parameters('location')]" 
+                     }, 
+                     "networkSecurityGroupName": { 
+                         "value": "[variables('networkSecurityGroupName')]" 
+                     },
+                     "networkApiVersion": { 
+                         "value": "[variables('networkApiVersion')]" 
+                     },
+                     "tag": {
+                        "value": "[parameters('tag')]"
+                    }
+                 } 
+             } 
+         },
+         { 
+             "name": "networkInterfacesSetup", 
+             "apiVersion": "[variables('deploymentApiVersion')]", 
+             "type": "Microsoft.Resources/deployments", 
+             "dependsOn": [
+                "networkSecurityGroupsSetup",
+                "publicIPAddressSetup"
+            ],
+             "properties": { 
+                 "mode": "Incremental", 
+                 "templateLink": { 
+                     "uri": "[variables('networkInterfaceSetupURL')]", 
+                     "contentVersion": "1.0.0.0" 
+                 }, 
+                 "parameters": { 
+                     "location": { 
+                         "value": "[parameters('location')]" 
+                     }, 
+                     "networkSecurityGroupName": { 
+                         "value": "[variables('networkSecurityGroupName')]" 
+                     },
+                     "networkApiVersion": { 
+                         "value": "[variables('networkApiVersion')]" 
+                     },
+                     "publicIpAddressName": { 
+                         "value": "[parameters('publicIpAddressName')]" 
+                     },
+                     "networkInterfaceName": { 
+                         "value": "[variables('networkInterfaceName')]" 
+                     },
+                     "subnetRef": { 
+                         "value": "[variables('subnetRef')]" 
+                     }
+                 } 
+             } 
+         },
+         { 
+             "name": "virtualMachineSetup", 
+             "apiVersion": "[variables('deploymentApiVersion')]", 
+             "type": "Microsoft.Resources/deployments", 
+             "dependsOn": [
+                "storageAccountSetup",
+                "networkInterfacesSetup"
+            ],
+             "properties": { 
+                 "mode": "Incremental", 
+                 "templateLink": { 
+                     "uri": "[variables('virtualMachineSetupURL')]", 
+                     "contentVersion": "1.0.0.0" 
+                 }, 
+                 "parameters": { 
+                     "location": { 
+                         "value": "[parameters('location')]" 
+                     }, 
+                     "virtualMachineName": { 
+                         "value": "[parameters('virtualMachineName')]" 
+                     },
+                     "networkApiVersion": { 
+                         "value": "[variables('networkApiVersion')]" 
+                     },
+                      "networkInterfaceName": { 
+                         "value": "[variables('networkInterfaceName')]" 
+                     },
+                      "storageAccountName": { 
+                         "value": "[variables('storageAccountName')]" 
+                     },
+                      "adminUsername": { 
+                         "value": "[parameters('adminUsername')]" 
+                     },
+                      "adminPassword": { 
+                         "value": "[parameters('adminPassword')]" 
+                     },
+                     "virtualMachineSize": { 
+                         "value": "[variables('virtualMachineSize')]" 
+                     },
+                     "imagePublisher": { 
+                         "value": "[variables('imagePublisher')]" 
+                     },
+                     "imageOffer": { 
+                         "value": "[variables('imageOffer')]" 
+                     },
+                     "imageSKU": { 
+                         "value": "[variables('imageSKU')]" 
+                     },
+                     "imageVersion": { 
+                         "value": "[variables('imageVersion')]" 
+                     }
+                 } 
+             } 
+         }  
+    ],
+    "outputs": {
+        "adminUsername":{
+            "type": "string",
+            "value": "[parameters('adminUsername')]"
+        },
+        "adminPassword":{
+            "type": "string",
+            "value": "[parameters('adminPassword')]"
+        },
+        "ssh address":{
+            "type": "string",
+            "value": "[concat(variables('publicIPdnsPrefix'), '.', parameters('location'), '.cloudapp.azure.com')]"
+        }
+    }
+}
