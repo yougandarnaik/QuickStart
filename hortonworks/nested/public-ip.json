@@ -39,21 +39,21 @@
         },
         "publicIpAddressName": {
             "type": "string",
-            "defaultValue": "hortonworks-ip",
+            "defaultValue": "",
             "metadata": {
                 "description":"publicIp Address Name"
             }
         },
         "publicIPdnsPrefix": {
             "type": "string",
-            "defaultValue": "publicdnsprefix",
+            "defaultValue": "",
             "metadata": {
                 "description":"public dns prefix"
             }
         },
         "networkApiVersion": {
             "type": "string",
-            "defaultValue": "2016-09-01",
+            "defaultValue": "",
             "metadata": {
                 "description":"API Version for the Network Resources"
             }
