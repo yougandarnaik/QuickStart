@@ -106,6 +106,13 @@
             "metadata": {
                 "description":"imageVersion"
             }
+        },
+        "networkApiVersion":{
+            "type": "string",
+            "defaultValue": "2016-04-30-preview",
+            "metadata": {
+                "description":"networkApiVersion"
+            }
         }
     },
      "variables": {
@@ -114,7 +121,7 @@
            {
             "name": "[parameters('virtualMachineName')]",
             "type": "Microsoft.Compute/virtualMachines",
-            "apiVersion": "2016-04-30-preview",
+            "apiVersion": "[parameters('networkApiVersion')]",
             "location": "[parameters('location')]",
             "dependsOn": [
                 "[concat('Microsoft.Network/networkInterfaces/', parameters('networkInterfaceName'))]",
