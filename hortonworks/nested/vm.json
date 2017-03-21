@@ -39,77 +39,77 @@
         },
         "virtualMachineName":{
             "type": "string",
-            "defaultValue": "hortonworks",
+            "defaultValue": "",
             "metadata": {
                 "description":"virtualMachine Name"
             }
         },
         "networkInterfaceName":{
             "type": "string",
-            "defaultValue": "hortonworks613",
+            "defaultValue": "",
             "metadata": {
                 "description":"networkInterface Name"
             }
         },
         "storageAccountName":{
             "type": "string",
-            "defaultValue": "testhdisks",
+            "defaultValue": "",
             "metadata": {
                 "description":"storageAccount Name"
             }
         },
         "adminUsername":{
             "type": "string",
-            "defaultValue": "hortonworks",
+            "defaultValue": "",
             "metadata": {
                 "description":"adminUserName"
             }
         },
         "adminPassword":{
             "type": "securestring",
-            "defaultValue": "Hortonworks@123",
+            "defaultValue": "",
             "metadata": {
                 "description":"adminPassword"
             }
         },
         "virtualMachineSize":{
             "type": "securestring",
-            "defaultValue": "Standard_DS1_v2",
+            "defaultValue": "",
             "metadata": {
                 "description":"virtualMachineSize"
             }
         },
         "imagePublisher":{
             "type": "securestring",
-            "defaultValue": "hortonworks",
+            "defaultValue": "",
             "metadata": {
                 "description":"imagePublisher"
             }
         },
         "imageOffer":{
             "type": "securestring",
-            "defaultValue": "hortonworks-sandbox",
+            "defaultValue": "",
             "metadata": {
                 "description":"imageOffer"
             }
         },
         "imageSKU":{
             "type": "securestring",
-            "defaultValue": "sandbox25",
+            "defaultValue": "",
             "metadata": {
                 "description":"imageSKU"
             }
         },
         "imageVersion":{
             "type": "securestring",
-            "defaultValue": "latest",
+            "defaultValue": "",
             "metadata": {
                 "description":"imageVersion"
             }
         },
         "networkApiVersion":{
             "type": "string",
-            "defaultValue": "2016-04-30-preview",
+            "defaultValue": "",
             "metadata": {
                 "description":"networkApiVersion"
             }
