@@ -39,14 +39,14 @@
         },
         "networkApiVersion":{
             "type": "string",
-            "defaultValue": "2016-09-01",
+            "defaultValue": "",
             "metadata": {
                 "description":"networkApi Version"
             }
         },
         "networkSecurityGroupName":{
             "type": "string",
-            "defaultValue": "hortonworks-nsg",
+            "defaultValue": "",
             "metadata": {
                 "description":"networkSecurityGroup Name"
             }
