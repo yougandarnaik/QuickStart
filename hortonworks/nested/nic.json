@@ -39,42 +39,42 @@
         },
         "networkApiVersion":{
             "type": "string",
-            "defaultValue": "2016-09-01",
+            "defaultValue": "",
             "metadata": {
                 "description":"networkApiVersion"
             }
         },
         "publicIpAddressName":{
             "type": "string",
-            "defaultValue": "hortonworks-ip",
+            "defaultValue": "",
             "metadata": {
                 "description":"publicIpAddress Name"
             }
         },
         "networkSecurityGroupName":{
             "type": "string",
-            "defaultValue": "hortonworks-nsg",
+            "defaultValue": "",
             "metadata": {
                 "description":"networkSecurityGroupName"
             }
         },
         "networkInterfaceName":{
             "type": "string",
-            "defaultValue": "hortonworks613",
+            "defaultValue": "",
             "metadata": {
                 "description":"networkInterface Name"
             }
         },
         "virtualNetworkName":{
             "type": "string",
-            "defaultValue": "test-h-vnet",
+            "defaultValue": "",
             "metadata": {
                 "description":"virtualNetwork Name"
             }
         },
         "subnetName":{
             "type": "string",
-            "defaultValue": "test-h-subnet",
+            "defaultValue": "",
             "metadata": {
                 "description":"subnet Name"
             }
