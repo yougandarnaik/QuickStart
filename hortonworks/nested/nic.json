@@ -1,0 +1,120 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "type": "string",
+            "defaultValue": "centralus",
+            "allowedValues": [
+                "Brazil South",
+                "brazilsouth",
+                "East Asia",
+                "eastasia",
+                "East US",
+                "eastus",
+                "Japan East",
+                "japaneast",
+                "Japan West",
+                "japanwest",
+                "North Central US",
+                "northcentralus",
+                "North Europe",
+                "northeurope",
+                "South Central US",
+                "southcentralus",
+                "West Europe",
+                "westeurope",
+                "West US",
+                "westus",
+                "Southeast Asia",
+                "southeastasia",
+                "Central US",
+                "centralus",
+                "East US 2",
+                "eastus2"
+            ],
+            "metadata": {
+                "description":"storage account location"
+            }
+        },
+        "networkApiVersion":{
+            "type": "string",
+            "defaultValue": "2016-09-01",
+            "metadata": {
+                "description":"networkApiVersion"
+            }
+        },
+        "publicIpAddressName":{
+            "type": "string",
+            "defaultValue": "hortonworks-ip",
+            "metadata": {
+                "description":"publicIpAddress Name"
+            }
+        },
+        "networkSecurityGroupName":{
+            "type": "string",
+            "defaultValue": "hortonworks-nsg",
+            "metadata": {
+                "description":"networkSecurityGroupName"
+            }
+        },
+        "networkInterfaceName":{
+            "type": "string",
+            "defaultValue": "hortonworks613",
+            "metadata": {
+                "description":"networkInterface Name"
+            }
+        },
+        "virtualNetworkName":{
+            "type": "string",
+            "defaultValue": "test-h-vnet",
+            "metadata": {
+                "description":"virtualNetwork Name"
+            }
+        },
+        "subnetName":{
+            "type": "string",
+            "defaultValue": "test-h-subnet",
+            "metadata": {
+                "description":"subnet Name"
+            }
+        }
+        
+    },
+     "variables": {
+         "vnetId": "[resourceId('ynaik-test-h','Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
+        "subnetRef": "[concat(variables('vnetId'), '/subnets/', parameters('subnetName'))]"
+    },
+    "resources": [
+      {
+            "name": "[parameters('networkInterfaceName')]",
+            "type": "Microsoft.Network/networkInterfaces",
+            "apiVersion": "[parameters('networkApiVersion')]",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+                "[concat('Microsoft.Network/virtualNetworks/', parameters('virtualNetworkName'))]",
+                "[concat('Microsoft.Network/publicIpAddresses/', parameters('publicIpAddressName'))]",
+                "[concat('Microsoft.Network/networkSecurityGroups/', parameters('networkSecurityGroupName'))]"
+            ],
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig1",
+                        "properties": {
+                            "subnet": {
+                                "id": "[variables('subnetRef')]"
+                            },
+                            "privateIPAllocationMethod": "Dynamic",
+                            "publicIpAddress": {
+                                "id": "[resourceId('ynaik-test-h','Microsoft.Network/publicIpAddresses', parameters('publicIpAddressName'))]"
+                            }
+                        }
+                    }
+                ],
+                "networkSecurityGroup": {
+                    "id": "[resourceId('ynaik-test-h', 'Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroupName'))]"
+                }
+            }
+        }          
+    ]
+}
