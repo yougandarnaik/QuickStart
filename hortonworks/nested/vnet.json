@@ -39,35 +39,35 @@
         },
         "networkApiVersion":{
             "type": "string",
-            "defaultValue": "2016-09-01",
+            "defaultValue": "",
             "metadata": {
                 "description":"API Version for the Network Resources"
             }
         },
         "virtualNetworkName":{
             "type": "string",
-            "defaultValue": "test-h-vnet",
+            "defaultValue": "",
             "metadata": {
                 "description":"virtualNetwork Name"
             }
         },
         "addressPrefix":{
             "type": "string",
-            "defaultValue": "172.16.2.0/24",
+            "defaultValue": "",
             "metadata": {
                 "description":"address Prefix"
             }
         },
         "subnetName":{
             "type": "string",
-            "defaultValue": "test-h-subnet",
+            "defaultValue": "",
             "metadata": {
                 "description":"subnet Name"
             }
         },
         "subnetPrefix":{
             "type": "string",
-            "defaultValue": "172.16.2.0/24",
+            "defaultValue": "",
             "metadata": {
                 "description":"subnet Prefix"
             }
