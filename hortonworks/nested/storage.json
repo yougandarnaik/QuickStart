@@ -47,7 +47,7 @@
         },
         "storageAccountType": {
             "type": "string",
-            "defaultValue": "Premium_LRS",
+            "defaultValue": "",
             "metadata": {
                 "description":"storage account type the vm"
             }
