@@ -5,7 +5,7 @@
     "parameters": {
         "storageAccountName": {
             "type": "string",
-            "defaultValue": "testhdisks",
+            "defaultValue": "",
             "metadata": {
                 "description":"storage account of the vm"
             }
