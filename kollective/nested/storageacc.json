@@ -1,0 +1,80 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location":{
+            "type":"string",
+            "defaultValue": "centralus",
+            "allowedValues": [
+                "Brazil South",
+                "brazilsouth",
+                "East Asia",
+                "eastasia",
+                "East US",
+                "eastus",
+                "Japan East",
+                "japaneast",
+                "Japan West",
+                "japanwest",
+                "North Central US",
+                "northcentralus",
+                "North Europe",
+                "northeurope",
+                "South Central US",
+                "southcentralus",
+                "West Europe",
+                "westeurope",
+                "West US",
+                "westus",
+                "Southeast Asia",
+                "southeastasia",
+                "Central US",
+                "centralus",
+                "East US 2",
+                "eastus2"
+            ],
+            "metadata": {
+                "description":"location"
+            }
+        },
+        "storageAccountName":{
+            "type":"string",
+            "defaultValue": "",
+            "metadata": {
+                "description":"VM address of the storage account"
+            }
+        },
+        "storageAccountType":{
+            "type":"string",
+            "defaultValue": "Premium_LRS",
+            "metadata": {
+                "description":"VM address of the storageAccountType"
+            }
+        },
+        "tag": {
+            "type": "object",
+            "defaultValue": {
+                "key1": "key",
+                "value1": "value"
+            },
+            "metadata": {
+                "description": "Tag Values"
+            }
+        }       
+    },
+    "variables": {},
+    "resources": [
+        {
+            "name": "[parameters('storageAccountName')]",
+            "type": "Microsoft.Storage/storageAccounts",
+            "apiVersion": "2015-06-15",
+            "location": "[parameters('location')]",
+            "tags": {
+                "[parameters('tag').key1]": "[parameters('tag').value1]"
+            },
+            "properties": {
+                "accountType": "[parameters('storageAccountType')]"
+            }
+        }
+    ]
+}
