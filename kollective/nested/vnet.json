@@ -40,28 +40,28 @@
 
         "virtualNetworkName":{
             "type": "string",
-            "defaultValue": "test_Kollective-vnet",
+            "defaultValue": "",
             "metadata": {
                 "description":"virtualNetworkName"
             }
         },
         "addressPrefix":{
             "type": "string",
-            "defaultValue": "10.4.2.0/24",
+            "defaultValue": "",
             "metadata": {
                 "description":"addressPrefix"
             }
         },
         "subnetName":{
             "type": "string",
-            "defaultValue": "test_Kollective-subnet",
+            "defaultValue": "",
             "metadata": {
                 "description":"subnetName"
             }
         },
         "subnetPrefix":{
             "type": "string",
-            "defaultValue": "10.4.2.0/24",
+            "defaultValue": "",
             "metadata": {
                 "description":"subnetPrefix"
             }
