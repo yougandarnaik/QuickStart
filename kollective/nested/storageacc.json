@@ -39,7 +39,7 @@
         },
         "storageAccountName":{
             "type":"string",
-            "defaultValue": "testkollectivedisks",
+            "defaultValue": "",
             "metadata": {
                 "description":"VM address of the storage account"
             }
