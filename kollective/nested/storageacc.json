@@ -39,14 +39,14 @@
         },
         "storageAccountName":{
             "type":"string",
-            "defaultValue": "",
+            "defaultValue": "testkollectivedisks",
             "metadata": {
                 "description":"VM address of the storage account"
             }
         },
         "storageAccountType":{
             "type":"string",
-            "defaultValue": "Premium_LRS",
+            "defaultValue": "Standard_LRS",
             "metadata": {
                 "description":"VM address of the storageAccountType"
             }
@@ -60,14 +60,21 @@
             "metadata": {
                 "description": "Tag Values"
             }
-        }     
+        },
+        "storageApiVersion":{
+            "type":"string",
+            "defaultValue": "2015-06-15",
+            "metadata": {
+                "description":"VM address of the storageAccountType"
+            }
+        }    
     },
     "variables": {},
     "resources": [
         {
             "name": "[parameters('storageAccountName')]",
             "type": "Microsoft.Storage/storageAccounts",
-            "apiVersion": "2015-06-15",
+            "apiVersion": "[parameters('storageApiVersion')]",
             "location": "[parameters('location')]",
             "tags": {
                 "[parameters('tag').key1]": "[parameters('tag').value1]"
